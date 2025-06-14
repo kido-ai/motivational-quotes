@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quotes Today</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: monospace;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: rgb(44, 191, 228);
+        }
+
+        .content {
+            background-color: #fffffff9;
+            padding: 20px;
+            border-radius: 20px;
+            flex-direction: column;
+            display: flex;
+            align-items: center;
+        }
+
+        .content h1 {
+            font-size: 50px;
+            text-align: center;
+            margin-bottom: 10px;
+            
+        }
+
+        .quote-box {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            padding: 0px 15px;
+            align-items: center;
+            border: 2px solid rgba(31, 31, 31, 0.242);
+            border-radius: 10px;
+            width: 50vh;
+        }
+        .quote-box #copyMe {
+            background-color: transparent;
+            border: none;
+            outline: none;
+            color: rgba(33, 33, 33, 0.422);
+            font-family: monospace;
+            height: 0%;
+        }
+
+        .content .quote-box {
+            margin-bottom: 20px;
+        }
+
+        .content #generate {
+            background-color: rgb(44, 191, 228);
+            font-family: monospace;
+            border: none;
+            padding: 10px;
+            border-radius: 20px;
+            color: white;
+            border: 2px solid rgba(31, 31, 31, 0.242);
+        }
+
+        .content #generate:hover {
+            background-color: rgb(19, 132, 160);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+            <h1>Quotes Today</h1>
+            <p>This "Quotes Today" has up to 100 quotes.</p>
+            <button id="generate">Generate a Quote</button>
+
+            <div class="quote-box">
+            <p id="quote">Your quote will appear here.</p>
+            <button id="copyMe" onclick="navigator.clipboard.writeText(quote.innerText); this.innerHTML = `<p style='color: #505050;'>Copied</p>`"></button>
+        </div>
+        </div>
+    </div>
+
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const quotes = {
+                motivation: [
+                    "Believe you can and you're halfway there. — Theodore Roosevelt",
+                    "Don't watch the clock; do what it does. Keep going. — Sam Levenson",
+                    "Success is not final, failure is not fatal: It is the courage to continue that counts. — Winston Churchill",
+                    "The harder you work for something, the greater you'll feel when you achieve it.",
+                    "Dream big and dare to fail. — Norman Vaughan",
+                    "Your only limit is your mind.",
+                    "Push yourself, because no one else is going to do it for you.",
+                    "Great things never come from comfort zones.",
+                    "Do something today that your future self will thank you for.",
+                    "Little by little, a little becomes a lot. — Tanzanian Proverb",
+                    "Success doesn't come from what you do occasionally. It comes from what you do consistently.",
+                    "Opportunities don't happen. You create them. — Chris Grosser",
+                    "Don't limit your challenges. Challenge your limits.",
+                    "It always seems impossible until it's done. — Nelson Mandela",
+                    "You don't have to be great to start, but you have to start to be great. — Zig Ziglar",
+                    "The future depends on what you do today. — Mahatma Gandhi",
+                    "Start where you are. Use what you have. Do what you can. — Arthur Ashe",
+                    "Hard work beats talent when talent doesn't work hard. — Tim Notke",
+                    "Success is the sum of small efforts, repeated day in and day out. — Robert Collier",
+                    "You are stronger than you think.",
+                    "Discipline is the bridge between goals and accomplishment. — Jim Rohn",
+                    "Wake up with determination. Go to bed with satisfaction.",
+                    "Don't wait for opportunity. Create it.",
+                    "Be so good they can't ignore you. — Steve Martin",
+                    "Act as if what you do makes a difference. It does. — William James",
+                    "Turn your wounds into wisdom. — Oprah Winfrey",
+                    "Make today so awesome yesterday gets jealous.",
+                    "Do not wait to strike till the iron is hot; but make it hot by striking. — William Butler Yeats",
+                    "You miss 100% of the shots you don't take. — Wayne Gretzky",
+                    "Everything you've ever wanted is on the other side of fear. — George Addair",
+                    "Doubt kills more dreams than failure ever will. — Suzy Kassem",
+                    "Success is what comes after you stop making excuses.",
+                    "Don't be pushed around by the fears in your mind. Be led by the dreams in your heart. — Roy T. Bennett",
+                    "If you're going through hell, keep going. — Winston Churchill",
+                    "The secret of getting ahead is getting started. — Mark Twain",
+                    "You don't need to see the whole staircase, just take the first step. — Martin Luther King Jr.",
+                    "Stay away from those people who try to disparage your ambitions. — Mark Twain",
+                    "What you get by achieving your goals is not as important as what you become by achieving your goals. — Zig Ziglar",
+                    "You are never too old to set another goal or to dream a new dream. — C.S. Lewis",
+                    "Fall seven times, stand up eight. — Japanese Proverb",
+                    "The best way to predict the future is to create it. — Peter Drucker",
+                    "Winners are not afraid of losing. But losers are. — Robert Kiyosaki",
+                    "The man who moves a mountain begins by carrying away small stones. — Confucius",
+                    "Success usually comes to those who are too busy to be looking for it. — Henry David Thoreau",
+                    "If you can dream it, you can do it. — Walt Disney",
+                    "You have within you right now, everything you need to deal with whatever the world can throw at you. — Brian Tracy",
+                    "Success isn't just about what you accomplish in your life; it's about what you inspire others to do.",
+                    "A goal without a plan is just a wish. — Antoine de Saint-Exupéry",
+                    "The pain you feel today will be the strength you feel tomorrow.",
+                    "Don't stop until you're proud.",
+                    "Do not let what you cannot do interfere with what you can do. — John Wooden",
+                    "Keep your face always toward the sunshine—and shadows will fall behind you. — Walt Whitman",
+                    "The way to get started is to quit talking and begin doing. — Walt Disney",
+                    "Don't count the days, make the days count. — Muhammad Ali",
+                    "Be brave enough to be bad at something new.",
+                    "You can't cross the sea merely by standing and staring at the water. — Rabindranath Tagore",
+                    "The difference between ordinary and extraordinary is that little extra. — Jimmy Johnson",
+                    "A little progress each day adds up to big results.",
+                    "Don't wait for the perfect moment. Take the moment and make it perfect.",
+                    "Success is not in what you have, but who you are. — Bo Bennett",
+                    "Act like you have already achieved your goal.",
+                    "Sometimes we're tested not to show our weaknesses, but to discover our strengths.",
+                    "Don't fear failure. Fear being in the exact same place next year.",
+                    "It's going to be hard, but hard does not mean impossible.",
+                    "You've got to get up every morning with determination if you're going to go to bed with satisfaction. — George Lorimer",
+                    "The expert in anything was once a beginner.",
+                    "Failure is not the opposite of success; it's part of success.",
+                    "Success doesn't rush. The greatest reward is the journey.",
+                    "Stay focused and never give up.",
+                    "Your life only gets better when you do. Work on yourself and the rest will follow.",
+                    "Don't let yesterday take up too much of today. — Will Rogers",
+                    "Even if you're on the right track, you'll get run over if you just sit there. — Will Rogers",
+                    "Strength doesn't come from what you can do. It comes from overcoming the things you once thought you couldn't.",
+                    "Be fearless in the pursuit of what sets your soul on fire.",
+                    "You didn't come this far to only come this far.",
+                    "Difficult roads often lead to beautiful destinations.",
+                    "One day or day one. You decide.",
+                    "Learn as if you will live forever, live like you will die tomorrow. — Mahatma Gandhi",
+                    "Action is the foundational key to all success. — Pablo Picasso",
+                    "There is no elevator to success—you have to take the stairs.",
+                    "Make each day your masterpiece. — John Wooden",
+                    "Be not afraid of going slowly, be afraid only of standing still. — Chinese Proverb",
+                    "The struggle you're in today is developing the strength you need for tomorrow.",
+                    "Big journeys begin with small steps.",
+                    "Motivation gets you going, but discipline keeps you growing. — John C. Maxwell",
+                    "Be proud of how far you've come and have faith in how far you can go.",
+                    "Work hard in silence. Let success make the noise.",
+                    "Life begins at the end of your comfort zone. — Neale Donald Walsch",
+                    "Don't wish for it. Work for it.",
+                    "It's not whether you get knocked down; it's whether you get up. — Vince Lombardi",
+                    "Hustle in silence and let your success be the noise.",
+                    "Energy and persistence conquer all things. — Benjamin Franklin",
+                    "Clarity precedes success. — Robin Sharma",
+                    "You are capable of more than you know.",
+                    "Don't decrease the goal. Increase the effort.",
+                    "Perseverance is not a long race; it is many short races one after another. — Walter Elliot",
+                    "Believe in yourself and all that you are.",
+                    "Make your life a mission — not an intermission.",
+                    "Success is doing what you love and believing in yourself.",
+                    "You've got what it takes, but it will take everything you've got."
+                ]
+            };
+
+            const generateBtn = document.getElementById("generate");
+            const quoteBox = document.getElementById("quote");
+
+            generateBtn.addEventListener("click", () => {
+
+                const category = "motivation";
+                
+                const randomQuote = quotes[category][Math.floor(Math.random() * quotes[category].length)];
+                quoteBox.textContent = randomQuote;
+
+                const copyMe = document.getElementById("copyMe").textContent = "Copy";
+                document.body.className = "";
+                document.body.classList.add(category);
+            });
+        });
+    </script>
+</body>
+</html>
