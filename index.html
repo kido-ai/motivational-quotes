@@ -16,11 +16,18 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background-color: rgb(44, 191, 228);
+            background-image: url('https://cdn.lospec.com/gallery/cat-in-cloudy-sky-105969.gif');
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-blend-mode: darken;
+            background-color: rgba(11, 11, 11, 0.57);
         }
 
         .content {
-            background-color: #fffffff9;
+            background-color: #ffffff2d;
+            color: rgb(234, 234, 234);
+            backdrop-filter: blur(3px);
             padding: 20px;
             border-radius: 20px;
             flex-direction: column;
@@ -41,7 +48,7 @@
             margin-top: 20px;
             padding: 0px 15px;
             align-items: center;
-            border: 2px solid rgba(31, 31, 31, 0.242);
+            border: 2px solid rgba(204, 204, 204, 0.242);
             border-radius: 10px;
             width: 50vh;
         }
@@ -49,9 +56,10 @@
             background-color: transparent;
             border: none;
             outline: none;
-            color: rgba(33, 33, 33, 0.422);
+            color: rgb(255, 255, 255);
             font-family: monospace;
             height: 0%;
+            padding-left: 10px;
         }
 
         .content .quote-box {
@@ -64,8 +72,8 @@
             border: none;
             padding: 10px;
             border-radius: 20px;
-            color: white;
             border: 2px solid rgba(31, 31, 31, 0.242);
+            color: rgb(234, 234, 234);
         }
 
         .content #generate:hover {
@@ -82,7 +90,7 @@
 
             <div class="quote-box">
             <p id="quote">Your quote will appear here.</p>
-            <button id="copyMe" onclick="navigator.clipboard.writeText(quote.innerText); this.innerHTML = `<p style='color: #505050;'>Copied</p>`"></button>
+            <button id="copyMe" onclick="navigator.clipboard.writeText(quote.innerText); this.innerHTML = `<p style='color: #cccccc3e;'>Copied</p>`"></button>
         </div>
         </div>
     </div>
